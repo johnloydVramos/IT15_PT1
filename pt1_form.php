@@ -360,53 +360,202 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Salary Payout : Employee</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Registration Form</h1>
                     <style>
-                        input[type=text]{
-                          width: 100%;
-                          padding: 12px 20px;
-                          margin: 8px 0;
-                          display: inline-block;
-                          border: 1px solid #ccc;
-                          border-radius: 4px;
-                          box-sizing: border-box;
+                        body{
+                        font-family: Arial, Helvetica, sans-serif;
+                        background-color: black;
                         }
-                        input[type=text] {
-                            border: 2px solid red;
-                            border-radius: 4px;
-                            }
 
-                    
-                        input[type=Submit]:hover {
-                          background-color: #45a049;
+                        * {
+                        box-sizing: border-box;
                         }
-                        div {
-                          border-radius: 0px;
-                          background-color: #f2f2f2;
-                          padding: 0px;
+
+                        /* Add padding to containers */
+                        .container {
+                        padding: 16px;
+                        background-color: white;
                         }
-                        </style>
 
-                    <form action="oe3.php" method="POST">
-                        <div>
-                            Employee Name <input type="text" name = "name" placeholder="Enter your name">
+                        /* Full-width input fields */
+                        input[type=text], input[type=password], input[type=date] {
+                        width: 100%;
+                        padding: 15px;
+                        margin: 5px 0 22px 0;
+                        display: inline-block;
+                        border: none;
+                        background: #f1f1f1;
+                        }
 
-                        </div>
-                        <div>
-                            Employee ID <input type = "text" name= "ID" placeholder="Enter your ID">
-                        </div>
+                        input[type=text]:focus, input[type=password]:focus {
+                        background-color: #ddd;
+                        outline: none;
+                        }
+
+                        /* Overwrite default styles of hr */
+                        hr {
+                        border: 1px solid #f1f1f1;
+                        margin-bottom: 25px;
+                        }
+
+                        /* Set a style for the submit button */
+                        .submit {
+                        background-color: blue;
+                        color: white;
+                        padding: 16px 20px;
+                        margin: 8px 0;
+                        border: none;
+                        cursor: pointer;
+                        width: 25%;
+                        opacity: 0.9;
+                        }
+
+                        .submit:hover {
+                        opacity: 1;
+                        }
+
+                        /* Add a blue text color to links */
+                        a {
+                        color: dodgerblue;
+                        }
+
                         
-                        <div>
-                            Number of Work hours <input type = "text" name= "work" placeholder="Enter your number of work hours">
-                        </div>
-                        <div>
-                            Rate per Hour <input type = "text" name= "rate" placeholder="Enter your Rate per hour">
-                        </div>
-                        <div>
-                            <input type="Submit" value="Submit Payout">
+                        </style>
+                    <?php 
+                    
+                    $username = $password  = "";
+                    $firstname = $lastname = "";
+                    $gender = $birthday = "";
+                    $address = $country = "";
+                    $password = $conpassword = "";
 
-                        </div>
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                        if (empty($_POST["firstname"])){
+                            //$firstnameErr = "Firstname is required...";
+                            echo "<script>alert('Firstname is required...')</script>";
+                        }else {
+                            $firstname = test_input($_POST["firstname"]);
+                        }
+                        if (empty($_POST["lastname"])){
+                            //$lastnameErr = "Lastname is required...";
+                            echo "<script>alert('Lastname is required...')</script>";
+                        }else {
+                            $lastname = test_input($_POST["lastname"]);
+                        }
+                        if (empty($_POST["gender"])){
+                           // $genderErr = "Gender is required...";
+                           echo "<script>alert('Gender is required...')</script>";
+                        }else {
+                            $gender = test_input($_POST["gender"]);
+                        }
+                        if (empty($_POST["birthday"])){
+                           // $birthdayErr = "Date of Birth is required...";
+                           echo "<script>alert('Date of Birth is required...')</script>";
+                        }else {
+                            $birthday = test_input($_POST["birthday"]);
+                        }
+                        if (empty($_POST["address"])){
+                            //$addressErr = "Address is required...";
+                            echo "<script>alert('Address is required...')</script>";
+                        }else {
+                            $address = test_input($_POST["address"]);
+                        }
+                        if (empty($_POST["country"])){
+                            //$countryErr = "Country is required...";
+                            echo "<script>alert('Country is required...')</script>";
+                        }else {
+                            $country = test_input($_POST["country"]);
+                        }
+                        if (empty($_POST["username"])){
+                            //$usernameErr = "Username is required...";
+                            echo "<script>alert('Username is required...')</script>";
+                        }else {
+                            $username = test_input($_POST["username"]);
+                        }
+                        if (empty($_POST["password"])) { 
+                            //$passwordErr = "Password is required...";
+                            echo "<script>alert('Password is required...')</script>";
+                        } else {
+                            $password = test_input($_POST["password"]);
+                        }
+                        if (empty($_POST["conpassword"])) { 
+                            //$passwordErr = "Password is required...";
+                            echo "<script>alert('Confirm Password is required...')</script>";
+                        } else {
+                            $conpassword = test_input($_POST["conpassword"]);
+                        }
+                    }
+                    
+                    function test_input($data){
+                        $data = trim($data);
+                        $data = stripslashes($data);
+                        $data = htmlspecialchars($data);
+                        return $data;
+                    }
+                
+                    ?>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+                       <body>
+                        
+                           <label> First Name : </label>
+                             <input type="text" name = "firstname" id="firstname" placeholder="Please enter your Firstname" >
+                                
+                                
+                                <label><b>Last Name : </label></b>
+                                   <input type="text" name = "lastname" id="lastname" placeholder="Please enter your Lastname" >
+     
+                                <label><b>Gender : </label></b>
+                                    <input type="text" name = "gender" id="gender" placeholder="Please enter your Gender" >
+                                 
+                                <label><b> Date of Birth : </label></b>
+                                     <input type="date" name = "birthday" id="birthday" placeholder="Please enter your Date of Birth" >
+                                  
+                                
+                                <label><b> Address : </label></b>
+                                   <> <input type="text" name = "address" id="address" placeholder="Please enter your Address" >
+                                    
+                                
+                                <label><b> Country : </label></b>
+                                    <> <input type="text" name = "country" id="country" placeholder="Please enter your Country" >
+                                    
+                                
+                                <label><b> Username : </label></b>
+                                    <> <input type="text" name = "username" id="username" placeholder="Please enter your Username" >
+                                   
+                                
+                                <label><b>Password : </label></b>
+                                    <input type="password" name = "password" id="password" placeholder="Please enter your Password" >
+                                    
+                                <label><b> Confirm Password : </label></b>
+                                    <input type="password" name = "conpassword" id="conpassword" placeholder="Please Confirm your Password" >
+                                   
+                                    <input type="submit" name = "submit" class="submit" value="Submit">
+                                     
+                                         
+                </body>
                     </form>
+                    <?php 
+                    echo "<h2>Your Given Values are as :</h2>";
+                    echo $firstname;
+                    echo "<br>";
+                    echo $lastname;
+                    echo "<br>";
+                    echo $gender;
+                    echo "<br>";
+                    echo $birthday;
+                    echo "<br>";
+                    echo $address;
+                    echo "<br>";
+                    echo $country;
+                    echo "<br>";
+                    echo $username;
+                    echo "<br>";
+                    echo $password;
+                    echo "<br>";
+                    echo $conpassword;
+                    echo "<br>";
+                    ?>
 
                 </div>
                 <!-- /.container-fluid -->
